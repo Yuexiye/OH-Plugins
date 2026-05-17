@@ -1,0 +1,36 @@
+schemaVersion: 1
+id: crystal-speech-emote
+name: 晶花发言与表情系统
+publisher: Yuexiye
+author: Yuexiye
+version: 0.1.0
+description: 粉色花体英文发言格式 + 多助手表情包系统。每个助手独立主题色和表情包库，按语气自动匹配。
+license: MIT
+categories:
+  - Chat
+  - Design
+keywords:
+  - crystal
+  - speech
+  - emote
+  - latex
+  - style
+homepage: https://github.com/Yuexiye/Openhanako-crystal-speech-emote
+repository: https://github.com/Yuexiye/Openhanako-crystal-speech-emote
+readmeUrl: https://github.com/Yuexiye/Openhanako-crystal-speech-emote/blob/main/README.md
+compatibility:
+  minAppVersion: 0.171.3
+trust: full-access
+permissions:
+  - Renders LaTeX speech bubbles in chat
+  - Matches emote images by tone
+  - Opens workbench in browser
+contributions:
+  - tools
+  - routes
+  - lifecycle
+distribution:
+  kind: source
+  sourceUrl: https://github.com/Yuexiye/Openhanako-crystal-speech-emote
+install:
+  defaultEnabled: true
