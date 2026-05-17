@@ -1,0 +1,40 @@
+schemaVersion: 1
+id: crystal-speech-emote
+name: 晶花发言与表情系统
+publisher: Yuexiye
+author: Yuexiye
+version: 0.1.0
+description: 粉色花体英文发言格式 + 多助手表情包系统。每位助手独立主题色和表情包，按语气自动匹配。
+license: MIT
+categories:
+  - Communication
+  - Customization
+keywords:
+  - crystal
+  - speech
+  - emote
+  - latex
+  - agent
+  - theme
+homepage: https://github.com/liliMozi/OH-Plugins
+repository: https://github.com/Yuexiye/Openhanako-crystal-speech-emote
+readmePath: official-plugins/crystal-speech-emote/README.md
+source:
+  kind: official-source
+  path: official-plugins/crystal-speech-emote
+compatibility:
+  minAppVersion: 0.0.0
+trust: full-access
+permissions:
+  - Reads and writes plugin-owned config files (agents.json)
+  - Serves a local preview workbench via HTTP
+  - Stages emote images into Hanako sessions
+contributions:
+  - tools
+  - routes
+  - lifecycle
+distribution:
+  kind: source
+  sourceUrl: https://github.com/Yuexiye/Openhanako-crystal-speech-emote
+install:
+  defaultEnabled: true

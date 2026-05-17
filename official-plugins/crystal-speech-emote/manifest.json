@@ -1,0 +1,31 @@
+{
+  "id": "crystal-speech-emote",
+  "name": "晶花发言与表情系统",
+  "version": "0.1.0",
+  "description": "粉色花体英文发言格式 + 多助手表情包系统。每个助手独立的主题色和表情包库，按语气自动匹配。",
+  "minAppVersion": "0.0.0",
+  "trust": "full-access",
+  "capabilities": {
+    "chat": { "projection": "auto" }
+  },
+  "contributes": {
+    "tools": [
+      { "source": "tools/render-speech.js" },
+      { "source": "tools/pick-emote.js" },
+      { "source": "tools/open-workbench.js" }
+    ],
+    "page": {
+      "title": { "zh": "晶花预览", "en": "Crystal Speech" },
+      "route": "/page"
+    },
+    "widget": {
+      "title": { "zh": "晶花发言", "en": "Crystal Speech Widget" },
+      "route": "/widget",
+      "minWidth": 280,
+      "minHeight": 200
+    }
+  },
+  "ui": {
+    "hostCapabilities": ["external.open", "clipboard.writeText"]
+  }
+}

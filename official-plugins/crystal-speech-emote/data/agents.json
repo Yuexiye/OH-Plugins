@@ -1,0 +1,82 @@
+{
+  "rebecca": {
+    "displayName": "瑞贝卡",
+    "theme": {
+      "primary": "#ff314f",
+      "primaryGlow": "rgba(255,49,79,0.4)",
+      "secondary": "#ff8a9a",
+      "font": "'Dancing Script','Brush Script MT',cursive",
+      "subColor": "#b0b0b0"
+    },
+    "emotes": {
+      "happy": "assets/emotes/rebecca/happy.png",
+      "angry": "assets/emotes/rebecca/angry.png",
+      "smirk": "assets/emotes/rebecca/smirk.png",
+      "serious": "assets/emotes/rebecca/serious.png",
+      "soft": "assets/emotes/rebecca/soft.png"
+    },
+    "toneMap": {
+      "开心": "happy",
+      "日常": "happy",
+      "不爽": "angry",
+      "怒": "angry",
+      "调侃": "smirk",
+      "不屑": "smirk",
+      "认真": "serious",
+      "正事": "serious",
+      "温柔": "soft",
+      "妥协": "soft"
+    }
+  },
+  "ophelia": {
+    "displayName": "奥菲莉娅",
+    "theme": {
+      "primary": "#6aa7ff",
+      "primaryGlow": "rgba(106,167,255,0.4)",
+      "secondary": "#b8d7ff",
+      "font": "'Great Vibes','Dancing Script',cursive",
+      "subColor": "#b0b0b0"
+    },
+    "emotes": {},
+    "toneMap": {
+      "专注": "focused",
+      "思考": "focused",
+      "柔软": "soft",
+      "倦怠": "tired"
+    }
+  },
+  "aimis": {
+    "displayName": "爱弥斯",
+    "theme": {
+      "primary": "#ffd36a",
+      "primaryGlow": "rgba(255,211,106,0.4)",
+      "secondary": "#fff0b8",
+      "font": "'Dancing Script','Pacifico',cursive",
+      "subColor": "#b0b0b0"
+    },
+    "emotes": {},
+    "toneMap": {
+      "温暖": "warm",
+      "倾听": "listening",
+      "惊喜": "surprised",
+      "安定": "calm"
+    }
+  },
+  "luoqixi": {
+    "displayName": "洛琪希",
+    "theme": {
+      "primary": "#6fd6c2",
+      "primaryGlow": "rgba(111,214,194,0.4)",
+      "secondary": "#b6efe4",
+      "font": "'Dancing Script','Segoe Script',cursive",
+      "subColor": "#b0b0b0"
+    },
+    "emotes": {},
+    "toneMap": {
+      "讲解": "explain",
+      "耐心": "patient",
+      "微笑": "smile",
+      "困惑": "confused"
+    }
+  }
+}

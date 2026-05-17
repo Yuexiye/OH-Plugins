@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Great+Vibes&family=Pacifico&family=Alex+Brush&family=Tangerine:wght@400;700&family=Arizonia&family=Segoe+Script&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=Liu+Jian+Mao+Cao&family=ZCOOL+QingKe+HuangYou&family=Noto+Serif+SC:wght@400;700&family=Long+Cang&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100vh;overflow:hidden;background:#1c1c1e;color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased;font-size:13px;--cnfont:system-ui,sans-serif}
+.layout{display:flex;height:100vh}
+.sidebar{width:240px;flex-shrink:0;border-right:1px solid rgba(255,255,255,.06);overflow-y:auto;padding:32px 20px}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+.main{flex:1;overflow-y:auto;padding:32px 40px;display:flex;flex-direction:column;gap:24px}
+.sec{margin-bottom:20px}
+.sec-title{font-size:11px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:5px 12px 5px 8px;font-size:12px;color:rgba(255,255,255,.5);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px}
+.pill:hover{background:rgba(255,255,255,.08)}
+.pill.active{background:#FF69B4;border-color:#FF69B4;color:#fff}
+.pill-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ctrl{margin-bottom:10px}
+.ctrl-label{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:4px}
+.ctrl-row{display:flex;gap:6px;align-items:center}
+.ctrl-input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:5px 10px;font-size:13px;color:#f5f5f7;outline:none;width:100%;transition:border-color .2s}
+.ctrl-input:focus{border-color:#FF69B4}
+.ctrl-input::placeholder{color:rgba(255,255,255,.2)}
+select.ctrl-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='rgba(255,255,255,.4)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:28px}select.ctrl-input option{background:#2c2c2e;color:#f5f5f7}
+.swatch{width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);overflow:hidden;flex-shrink:0;position:relative;cursor:pointer}
+.swatch input{position:absolute;top:-4px;left:-4px;width:calc(100%+8px);height:calc(100%+8px);border:none;padding:0;cursor:pointer;background:none}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.fbtn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:4px 8px;font-size:11px;color:rgba(255,255,255,.5);cursor:pointer;transition:all .15s;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fbtn:hover{background:rgba(255,255,255,.07)}
+.fbtn.active{background:#FF69B4;border-color:#FF69B4;color:#fff}
+.dgrid{display:flex;gap:4px;flex-wrap:wrap}
+.dbtn{width:28px;height:28px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.dbtn:hover{background:rgba(255,255,255,.07)}
+.dbtn.active{background:#FF69B4;border-color:#FF69B4;color:#fff}
+.preview-box{padding:32px 0 24px;border-bottom:1px solid rgba(255,255,255,.06)}
+.preview-placeholder{color:rgba(255,255,255,.15);text-align:center;padding:20px 0;font-size:14px}
+.crystal{color:var(--accent,#ff314f);font-family:var(--font,'Dancing Script',cursive);font-size:28px;font-weight:600;font-style:italic;text-decoration-line:underline;text-decoration-color:var(--accent,#ff314f);text-underline-offset:7px}
+.deco{color:var(--accent2,#ff8a9a);font-size:22px;margin-right:6px}
+.sub{color:var(--sub,#b0b0b0);font-size:13px;margin:4px 0 0 4px;font-family:var(--cnfont,system-ui)}
+.sub::before{content:'— ';color:rgba(255,255,255,.2)}
+.obar{display:flex;gap:12px;padding:12px 0 0}
+.oblock{flex:1;min-width:0}
+.olabel{font-size:10px;color:rgba(255,255,255,.35);margin-bottom:4px}
+.ocode{background:rgba(255,255,255,.04);border-radius:6px;padding:6px 10px;font-family:'SF Mono','Consolas',monospace;font-size:11px;color:rgba(255,255,255,.4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ocopy{padding:1px 6px;font-size:10px;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.4);cursor:pointer;margin-top:3px}
+.ocopy:hover{background:rgba(255,255,255,.06)}
+.sbtn{background:var(--accent,#ff314f);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:500;padding:8px 0;cursor:pointer;transition:opacity .2s;width:100%}
+.sbtn:hover{opacity:.8}
+.rgrid{display:flex;gap:24px;flex:1;min-height:0}
+.rcol{flex:1;display:flex;flex-direction:column;gap:20px}
+.csec{display:flex;flex-direction:column;gap:8px}
+.crow{display:flex;gap:8px}
+.crow .fld{flex:1}
+.fld label{display:block;font-size:11px;color:rgba(255,255,255,.35);margin-bottom:4px}
+.fld textarea{resize:vertical;min-height:32px;font-size:15px;font-family:'Dancing Script',cursive}
+.ttab{width:100%;border-collapse:collapse}
+.ttab td,.ttab th{border:1px solid rgba(255,255,255,.06);padding:3px 8px;font-size:12px;color:rgba(255,255,255,.4);text-align:left}
+.ttab th{color:rgba(255,255,255,.7);font-weight:500;background:rgba(255,255,255,.03)}
+.ttab input{background:transparent;border:none;padding:2px 4px;font-size:12px;color:#f5f5f7;width:100%;outline:none}
+.ttab input:focus{outline:1px solid #FF69B4;border-radius:2px}
+.tadd{display:flex;gap:4px;margin-top:6px}
+.tadd input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:4px 8px;font-size:12px;color:#f5f5f7;outline:none}
+.tadd .btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.5);font-size:16px;cursor:pointer;width:28px;display:flex;align-items:center;justify-content:center}
+.tadd .btn:hover{background:rgba(255,255,255,.1)}
+.estrip{display:flex;gap:8px;flex-wrap:wrap}
+.eslot{width:48px;height:48px;border-radius:10px;border:1px dashed rgba(255,255,255,.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:9px;color:rgba(255,255,255,.25);position:relative;transition:all .15s}
+.eslot:hover{border-color:rgba(255,105,180,.4)}
+.eslot .e{font-size:18px}
+.eslot.active{border-color:#FF69B4;border-style:solid;background:rgba(255,105,180,.06)}
+.eslot img{width:100%;height:100%;border-radius:8px;object-fit:cover}
+.eup{position:absolute;bottom:-3px;right:-3px;width:16px;height:16px;border-radius:50%;background:#FF69B4;color:#fff;font-size:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1}
+.ehint{font-size:11px;color:rgba(255,255,255,.2);margin-top:6px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(44,44,46,.95);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px 20px;font-size:13px;color:#f5f5f7;box-shadow:0 8px 32px rgba(0,0,0,.5);z-index:999;animation:ti .3s ease}
+@keyframes ti{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+</style>
+</head>
+<body>
+<div class="layout">
+  <div class="sidebar">
+    <div style="margin-bottom:28px"><span style="font-size:15px;font-weight:600;color:#FF69B4">✦ 晶花发言</span></div>
+    <div class="sec"><div class="sec-title">助手</div><div class="pills" id="agentGroup"></div></div>
+    <div class="sec">
+      <div class="sec-title">颜色</div>
+      <div class="ctrl"><div class="ctrl-label">主题色</div><div class="ctrl-row"><input class="ctrl-input" id="colorPrimary" value="#ff314f"><div class="swatch"><input type="color" id="colorPrimaryPicker" value="#ff314f"></div></div></div>
+      <div class="ctrl"><div class="ctrl-label">浅色</div><div class="ctrl-row"><input class="ctrl-input" id="colorSecondary" value="#ff8a9a"><div class="swatch"><input type="color" id="colorSecondaryPicker" value="#ff8a9a"></div></div></div>
+      <div class="ctrl"><div class="ctrl-label">注释色</div><div class="ctrl-row"><input class="ctrl-input" id="colorSub" value="#b0b0b0"><div class="swatch"><input type="color" id="colorSubPicker" value="#b0b0b0"></div></div></div>
+    </div>
+    <div class="sec"><div class="sec-title">英文</div><div class="fgrid" id="fontGroup"><button class="fbtn active" data-font="'Dancing Script','Brush Script MT',cursive">Dancing</button><button class="fbtn" data-font="'Great Vibes','Dancing Script',cursive">Great Vibes</button><button class="fbtn" data-font="'Pacifico',cursive">Pacifico</button><button class="fbtn" data-font="'Segoe Script','Brush Script MT',cursive">Segoe</button><button class="fbtn" data-font="'Alex Brush','Great Vibes',cursive">Alex Brush</button><button class="fbtn" data-font="'Tangerine',cursive">Tangerine</button><button class="fbtn" data-font="'Arizonia','Great Vibes',cursive">Arizonia</button></div></div>
+    <div class="sec"><div class="sec-title">中文</div><div class="fgrid" id="cnFontGroup"><button class="fbtn active" data-cnfont="system-ui,sans-serif">系统</button><button class="fbtn" data-cnfont="'Ma Shan Zheng',cursive">马善政楷</button><button class="fbtn" data-cnfont="'ZCOOL XiaoWei',cursive">站酷小魏</button><button class="fbtn" data-cnfont="'Liu Jian Mao Cao',cursive">柳建茂草</button><button class="fbtn" data-cnfont="'ZCOOL QingKe HuangYou',cursive">黄油</button><button class="fbtn" data-cnfont="'Noto Serif SC',serif">思源宋体</button><button class="fbtn" data-cnfont="'Long Cang',cursive">龙仓</button><button class="fbtn" data-cnfont="'ZCOOL KuaiLe',cursive">快乐</button></div></div>
+    <div class="sec"><div class="sec-title">字号</div><div class="ctrl"><div class="ctrl-label">英文</div><select class="ctrl-input" id="enSizeSelect"><option value="normalsize">正常</option><option value="large" selected>大</option><option value="Large">更大</option><option value="LARGE">最大</option></select></div><div class="ctrl"><div class="ctrl-label">中文</div><select class="ctrl-input" id="cnSizeSelect"><option value="tiny">极小</option><option value="scriptsize">非常小</option><option value="footnotesize">脚注</option><option value="small" selected>小</option><option value="normalsize">正常</option></select></div></div>
+    <div class="sec"><div class="sec-title">装饰</div><div class="dgrid" id="decoGroup"><button class="dbtn" data-deco="❀">❀</button><button class="dbtn active" data-deco="✦">✦</button><button class="dbtn" data-deco="♡">♡</button><button class="dbtn" data-deco="☆">☆</button><button class="dbtn" data-deco="✿">✿</button><button class="dbtn" data-deco="🌸">🌸</button><button class="dbtn" data-deco="✧">✧</button><button class="dbtn" data-deco="♪">♪</button><button class="dbtn" data-deco="☘">☘</button><button class="dbtn" data-deco="🕊">🕊</button></div></div>
+    <div style="margin-top:24px"><button class="sbtn" id="saveBtn">保存配置</button></div>
+  </div>
+  <div class="main">
+    <div class="preview-box" id="bubble"><div class="preview-placeholder">在侧栏调整，预览实时更新</div></div>
+    <div class="obar"><div class="oblock"><div class="olabel">LaTeX</div><div class="ocode" id="latexOut">—</div><button class="ocopy" id="copyLatex">复制</button></div><div class="oblock"><div class="olabel">纯文本</div><div class="ocode" id="textOut">—</div><button class="ocopy" id="copyText">复制</button></div></div>
+    <div class="rgrid">
+      <div class="rcol">
+        <div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">内容</div>
+        <div class="csec"><div class="crow"><div class="fld"><label>语气</label><select class="ctrl-input" id="toneInput"><option value="开心">😊 开心</option><option value="日常">日常</option><option value="不爽">😤 不爽</option><option value="调侃">😏 调侃</option><option value="认真">🤔 认真</option><option value="温柔">🤗 温柔</option></select></div></div>
+        <div class="fld"><label>英文</label><textarea class="ctrl-input" id="enInput" rows="2" style="font-family:'Dancing Script',cursive;font-size:16px">Ready to roll!♪</textarea></div>
+        <div class="fld"><label>中文</label><input class="ctrl-input" id="cnInput" value="开干"></div></div></div>
+      </div>
+      <div class="rcol">
+        <div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">映射</div>
+        <table class="ttab"><thead><tr><th>语气</th><th>表情</th></tr></thead><tbody id="toneBody"></tbody></table>
+        <div class="tadd"><input id="toneNewKey" placeholder="新语气"><button class="btn" id="toneAddBtn">+</button></div></div>
+        <div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">表情</div>
+        <div class="estrip" id="emoteStrip"></div><div class="ehint">点击 + 上传</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const API='http://localhost:8904';
+const AGENTS={
+  rebecca:{name:'瑞贝卡',accent:'#ff314f',accent2:'#ff8a9a',glow:'rgba(255,49,79,0.4)',sub:'#b0b0b0',font:"'Dancing Script','Brush Script MT',cursive"},
+  ophelia:{name:'奥菲莉娅',accent:'#6aa7ff',accent2:'#b8d7ff',glow:'rgba(106,167,255,0.4)',sub:'#b0b0b0',font:"'Great Vibes','Dancing Script',cursive"},
+  aimis:{name:'爱弥斯',accent:'#ffd36a',accent2:'#fff0b8',glow:'rgba(255,211,106,0.4)',sub:'#b0b0b0',font:"'Dancing Script','Pacifico',cursive"},
+  luoqixi:{name:'洛琪希',accent:'#6fd6c2',accent2:'#b6efe4',glow:'rgba(111,214,194,0.4)',sub:'#b0b0b0',font:"'Segoe Script','Dancing Script',cursive"}
+};
+let cur='rebecca',cfg={};
+async function init(){await load();renderPills();renderFont();renderCnFont();renderDeco();setupColors();setupEvents();sel('rebecca')}
+async function load(){try{const r=await fetch(API+'/api/agents');cfg=await r.json()}catch(e){}}
+function renderPills(){const g=document.getElementById('agentGroup');g.innerHTML=Object.entries(AGENTS).map(([id,a])=>`<div class="pill agent-pill" data-id="${id}"><span class="pill-dot" style="background:${a.accent}"></span>${a.name}</div>`).join('');g.addEventListener('click',e=>{const b=e.target.closest('.agent-pill');if(b)sel(b.dataset.id)})}
+function sel(id){cur=id;const a=AGENTS[id],c=cfg[id];document.querySelectorAll('.agent-pill').forEach(b=>b.classList.toggle('active',b.dataset.id===id))
+if(c&&c.theme){apply(c.theme.primary,c.theme.secondary,c.theme.subColor,c.theme.font,c.theme.primaryGlow);syncC(c.theme.primary,c.theme.secondary,c.theme.subColor);updFont(c.theme.font)
+if(c.theme.cnFont){document.documentElement.style.setProperty('--cnfont',c.theme.cnFont);document.querySelectorAll('#cnFontGroup .fbtn').forEach(b=>b.classList.toggle('active',b.dataset.cnfont===c.theme.cnFont))}
+if(c.theme.enSize)document.getElementById('enSizeSelect').value=c.theme.enSize;if(c.theme.cnSize)document.getElementById('cnSizeSelect').value=c.theme.cnSize
+}else if(a){apply(a.accent,a.accent2,a.sub,a.font,a.glow);syncC(a.accent,a.accent2,a.sub);updFont(a.font)}
+renderTone(id);renderEmote(id);upd()}
+function apply(p,s,sb,f,g){const r=document.documentElement;r.style.setProperty('--accent',p);r.style.setProperty('--accent2',s);r.style.setProperty('--sub',sb);r.style.setProperty('--font',f);r.style.setProperty('--glow',g);document.querySelectorAll('.sbtn').forEach(b=>b.style.background=p)}
+function syncC(p,s,sb){['Primary','Secondary','Sub'].forEach(k=>{const v=k==='Primary'?p:k==='Secondary'?s:sb;document.getElementById('color'+k).value=v;document.getElementById('color'+k+'Picker').value=v})}
+function setupColors(){['Primary','Secondary','Sub'].forEach(k=>{const t=document.getElementById('color'+k),p=document.getElementById('color'+k+'Picker');t.addEventListener('input',()=>{p.value=t.value;onColor()});p.addEventListener('input',()=>{t.value=p.value;onColor()})})}
+function onColor(){const p=document.getElementById('colorPrimary').value,s=document.getElementById('colorSecondary').value,sb=document.getElementById('colorSub').value,f=document.querySelector('#fontGroup .fbtn.active')?.dataset.font||"'Dancing Script','Brush Script MT',cursive";apply(p,s,sb,f,hexRgba(p,0.4));upd()}
+function hexRgba(h,a){if(!h||h.length<7)return'rgba(255,49,79,0.4)';return`rgba(${parseInt(h.slice(1,3),16)},${parseInt(h.slice(3,5),16)},${parseInt(h.slice(5,7),16)},${a})`}
+function renderFont(){document.getElementById('fontGroup').addEventListener('click',e=>{const b=e.target.closest('.fbtn');if(b){updFont(b.dataset.font);upd()}})}
+function updFont(f){document.querySelectorAll('#fontGroup .fbtn').forEach(b=>b.classList.toggle('active',b.dataset.font===f))}
+function renderCnFont(){document.getElementById('cnFontGroup').addEventListener('click',e=>{const b=e.target.closest('.fbtn');if(b){document.querySelectorAll('#cnFontGroup .fbtn').forEach(btn=>btn.classList.remove('active'));b.classList.add('active');document.documentElement.style.setProperty('--cnfont',b.dataset.cnfont);upd()}})}
+function renderDeco(){document.getElementById('decoGroup').addEventListener('click',e=>{const b=e.target.closest('.dbtn');if(b){document.querySelectorAll('#decoGroup .dbtn').forEach(btn=>btn.classList.remove('active'));b.classList.add('active');upd()}})}
+function renderTone(id){const c=cfg[id],tb=document.getElementById('toneBody'),m=c?.toneMap||{},es=Object.entries(m);tb.innerHTML=es.length?es.map(([k,v])=>`<tr><td><input class="tk" value="${esc(k)}"></td><td><input class="tv" value="${esc(v)}"></td></tr>`).join(''):'<tr><td colspan="2" style="text-align:center;color:rgba(255,255,255,.15);font-size:11px">暂无映射</td></tr>'}
+document.getElementById('toneAddBtn').addEventListener('click',()=>{const k=document.getElementById('toneNewKey').value.trim();if(!k)return;if(!cfg[cur])cfg[cur]={displayName:AGENTS[cur]?.name||cur,theme:{},emotes:{},toneMap:{}};if(!cfg[cur].toneMap)cfg[cur].toneMap={};cfg[cur].toneMap[k]='happy';document.getElementById('toneNewKey').value='';renderTone(cur);upd()})
+function collectTM(){const m={};document.querySelectorAll('#toneBody tr').forEach(tr=>{const i=tr.querySelectorAll('input');if(i.length===2){const k=i[0].value.trim(),v=i[1].value.trim();if(k)m[k]=v||'happy'}});return m}
+function renderEmote(id){const c=cfg[id],st=document.getElementById('emoteStrip'),t=document.getElementById('toneInput').value,ai={'开心':'happy','日常':'happy','不爽':'angry','调侃':'smirk','认真':'serious','温柔':'soft'},aid=ai[t]||'happy',el=[{id:'happy',emoji:'😊',label:'开心'},{id:'angry',emoji:'😤',label:'不爽'},{id:'smirk',emoji:'😏',label:'调侃'},{id:'serious',emoji:'🤔',label:'认真'},{id:'soft',emoji:'🤗',label:'温柔'}],em=c?.emotes||{};st.innerHTML=el.map(e=>{const act=e.id===aid,hi=em[e.id];return`<div class="eslot${act?' active':''}">${hi?`<img src="${API}/${em[e.id]}">`:`<span class="e">${e.emoji}</span>`}<input type="file" accept="image/png,image/jpeg" style="display:none" data-agent="${id}" data-tone="${e.id}"><span class="eup" onclick="this.previousElementSibling.click()">+</span></div>`}).join('');st.querySelectorAll('input[type="file"]').forEach(i=>{i.addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;const fd=new FormData();fd.append('agentId',i.dataset.agent);fd.append('toneId',i.dataset.tone);fd.append('file',f);try{const r=await fetch(API+'/api/upload-emote',{method:'POST',body:fd}),res=await r.json();if(res.ok){toast('✅ '+i.dataset.tone+' 上传成功');await load();renderEmote(cur);upd()}else toast('❌ '+(res.error||'失败'))}catch(err){toast('❌ '+err.message)}})})}
+document.getElementById('saveBtn').addEventListener('click',async()=>{const p=document.getElementById('colorPrimary').value,s=document.getElementById('colorSecondary').value,sb=document.getElementById('colorSub').value,f=document.querySelector('#fontGroup .fbtn.active')?.dataset.font||"'Dancing Script','Brush Script MT',cursive",cn=document.querySelector('#cnFontGroup .fbtn.active')?.dataset.cnfont||'system-ui,sans-serif',es=document.getElementById('enSizeSelect').value,cs=document.getElementById('cnSizeSelect').value;if(!cfg[cur])cfg[cur]={displayName:AGENTS[cur]?.name||cur,theme:{},emotes:{},toneMap:{}};cfg[cur].theme={primary:p,primaryGlow:hexRgba(p,0.4),secondary:s,font:f,cnFont:cn,enSize:es,cnSize:cs,subColor:sb};cfg[cur].toneMap=collectTM();if(!cfg[cur].emotes)cfg[cur].emotes={};try{const r=await fetch(API+'/api/save-config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(cfg)}),res=await r.json();toast(res.ok?'✅ 已保存':'❌ '+(res.error||'失败'))}catch(err){toast('❌ '+err.message)}})
+function setupEvents(){['toneInput','enInput','cnInput'].forEach(id=>document.getElementById(id).addEventListener('input',upd));['enSizeSelect','cnSizeSelect'].forEach(id=>{const el=document.getElementById(id);el.addEventListener('change',upd);el.addEventListener('input',upd)})}
+function upd(){const p=document.getElementById('colorPrimary').value,s=document.getElementById('colorSecondary').value,sb=document.getElementById('colorSub').value,f=document.querySelector('#fontGroup .fbtn.active')?.dataset.font||"'Dancing Script','Brush Script MT',cursive",de=document.querySelector('#decoGroup .dbtn.active')?.dataset.deco||'✦',en=document.getElementById('enInput').value.trim(),cn=document.getElementById('cnInput').value.trim(),b=document.getElementById('bubble')
+if(!en&&!cn){b.innerHTML='<div class="preview-placeholder">在侧栏调整，预览实时更新</div>';document.getElementById('latexOut').textContent='—';document.getElementById('textOut').textContent='—';return}
+const den=en||'(英文)',dcn=cn||'(注释)',g=hexRgba(p,0.4),es_=document.getElementById('enSizeSelect').value,cs_=document.getElementById('cnSizeSelect').value;const sz={normalsize:'18px',large:'26px',Large:'34px',LARGE:'42px',tiny:'10px',scriptsize:'11px',footnotesize:'12px',small:'13px'};b.innerHTML=`<p><span class="deco" style="color:${s};font-size:${sz[es_]||'26px'}">${de}</span><span class="crystal" style="color:${p};font-family:${f};font-size:${sz[es_]||'26px'};text-shadow:0 0 8px ${g}">${esc(den)}</span></p><div class="sub" style="color:${sb};font-size:${sz[cs_]||'13px'};font-family:${getComputedStyle(document.documentElement).getPropertyValue('--cnfont').trim()||'system-ui'}">${esc(dcn)}</div>`
+document.getElementById('latexOut').textContent=`\\({\\${es_} \\textcolor{${s}}{\\text{${de}}} \\underset{\\textcolor{${sb}}{\\text{\\${cs_} ${escLatex(dcn)}}}}{\\textcolor{${p}}{\\underline{\\mathscr{${escLatex(den)}}}}}}\\)`;document.getElementById('textOut').textContent=`${de} ${den}\n— ${dcn}`;renderEmote(cur)}
+document.getElementById('copyLatex').addEventListener('click',()=>cp('latexOut'));document.getElementById('copyText').addEventListener('click',()=>cp('textOut'))
+function cp(id){const t=document.getElementById(id).textContent;if(t==='—')return;navigator.clipboard.writeText(t).then(()=>toast('已复制'))}
+function toast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2000)}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function escLatex(s){return s.replace(/_/g,'\\_').replace(/&/g,'\\&').replace(/%/g,'\\%')}
+init();
+</script>
+</body>
+</html>
